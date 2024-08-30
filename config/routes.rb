@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get "pages/home"
+
+  resources :questions do
+    collection do
+      get 'play'
+      post 'check_answer'
+      get 'result'
+    end
+  end
+  resources :games
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -10,5 +20,5 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "pages#home"
 end

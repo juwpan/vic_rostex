@@ -1,0 +1,45 @@
+<!-- app/views/questions/index.html.erb -->
+<div class="container">
+  <div class="m-5">
+    <div class="row">
+      <% @questions.each do |q| %>
+        <div class="col-md-4 mb-3 d-flex">
+          <!-- Кнопка для открытия модального окна -->
+          <div class="card p-3 <%= bg_color_cycle %> text-white d-flex flex-column justify-content-between">
+            <div>
+              <p><%= q.body %></p>
+              <p>Нажмите для ответа</p>
+            </div>
+
+            <!-- Кнопка для открытия модального окна -->
+            <button type="button" class="btn btn-light mt-auto" data-bs-toggle="modal" data-bs-target="#modal-<%= q.id %>">
+              Открыть ответ
+            </button>
+          </div>
+
+          <!-- Модальное окно для каждого вопроса -->
+          <div class="modal fade" id="modal-<%= q.id %>" tabindex="-1" aria-labelledby="modalLabel-<%= q.id %>" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalLabel-<%= q.id %>">Ответ на вопрос</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p><%= q.answer["1"] %></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div>
+  <p class="text-center"><%= link_to 'Back', '/', class: "fs-5" %></p>
+</div>
