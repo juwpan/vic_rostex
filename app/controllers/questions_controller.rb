@@ -22,9 +22,13 @@ class QuestionsController < ApplicationController
 
     #проверкa правильного ответа:
     if selected_answer == correct_answer_from_question.answer["1"]
+      flash[:notice] = "Correct answer!"
+
       session[:correct_answers] += 1
       session[:question_check] += 1
     else
+      flash[:alert] = "Not the right answer!"
+
       session[:errors] += 1
     end
     

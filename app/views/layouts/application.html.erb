@@ -18,6 +18,18 @@
   </head>
 
   <body>
+    <% flash.each do |flash_type, message| %>
+      <% if flash_type == "notice" %>
+        <div class="text-center alert alert-success">
+          <%= message %>
+        </div>
+      <% else %>
+        <div class="text-center alert alert-danger">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
