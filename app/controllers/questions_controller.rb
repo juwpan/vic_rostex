@@ -34,7 +34,7 @@ class QuestionsController < ApplicationController
     end
 
     # Перенаправление на результат или следующий вопрос
-    if session[:errors] >= 2 || session[:question_check] == 1
+    if session[:errors] >= 2 || session[:question_check] == 20
       redirect_to result_questions_path
     else
       redirect_to play_questions_path
