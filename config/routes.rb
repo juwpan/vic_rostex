@@ -3,9 +3,9 @@ Rails.application.routes.draw do
 
   resources :questions do
     collection do
-      get 'play'
-      post 'check_answer'
-      get 'result'
+      post "check_answer"
+      get "result"
+      get "play"
     end
   end
   resources :games

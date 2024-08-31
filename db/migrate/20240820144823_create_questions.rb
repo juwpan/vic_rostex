@@ -5,9 +5,8 @@ class CreateQuestions < ActiveRecord::Migration[7.2]
       t.jsonb :answer, default: {}
 
       t.timestamps
-
     end
-  
+
     add_index :questions, :answer, using: :gin
   end
 end

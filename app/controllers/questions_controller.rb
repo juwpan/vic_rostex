@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_all_questions, only: [:index, :play, :check_answer]
+  before_action :set_first_questions, only: [:play]
 
   def index
   end
@@ -9,9 +10,9 @@ class QuestionsController < ApplicationController
     session[:errors] ||= 0
     session[:correct_answers] ||= 0
 
-    @question = @questions.shuffle.first
-
     session[:current_question_id] = @question.id
+
+    @question_answer_rand = @question.answer.to_a.shuffle.to_h
   end
 
   def check_answer
@@ -20,20 +21,20 @@ class QuestionsController < ApplicationController
 
     correct_answer_from_question = @questions.find(question_id)
 
-    #проверкa правильного ответа:
+    # проверкa правильного ответа:
     if selected_answer == correct_answer_from_question.answer["1"]
-      flash[:notice] = "Correct answer!"
+      flash[:notice] = "Правильный ответ!"
 
       session[:correct_answers] += 1
       session[:question_check] += 1
     else
-      flash[:alert] = "Not the right answer!"
+      flash[:alert] = "Не правильный ответ!"
 
       session[:errors] += 1
     end
-    
+
     # Перенаправление на результат или следующий вопрос
-    if session[:errors] >= 2 || session[:question_check] == 10
+    if session[:errors] >= 2 || session[:question_check] == 1
       redirect_to result_questions_path
     else
       redirect_to play_questions_path
@@ -48,6 +49,10 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  def set_first_questions 
+    @question = @questions.shuffle.first
+  end
 
   def set_all_questions
     @questions = Question.all

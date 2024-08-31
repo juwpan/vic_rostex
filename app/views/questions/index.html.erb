@@ -1,5 +1,11 @@
 <!-- app/views/questions/index.html.erb -->
 <div class="container">
+  <div class=" text-center m-1 fs-4">
+    Количество вопросов: <%= @questions.size %>
+  </div>
+  <div>
+    <p class="text-center"><%= link_to 'Back', '/', class: "fs-5 btn btn-primary" %></p>
+  </div>
   <div class="m-5">
     <div class="row">
       <% @questions.each do |q| %>
@@ -41,5 +47,5 @@
 </div>
 
 <div>
-  <p class="text-center"><%= link_to 'Back', '/', class: "fs-5" %></p>
+  <p class="text-center"><%= link_to 'Back', '/', class: "fs-5 btn btn-primary" %></p>
 </div>

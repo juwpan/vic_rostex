@@ -1,16 +1,28 @@
 <!-- app/views/questions/result.html.erb -->
-<h1>Game Over</h1>
-<p>Correct Answers: <%= @correct_answers %></p>
-<p>Errors: <%= @errors %></p>
-
 <div class="container">
+  <% unless @errors.nil? %>
+    <% if @errors >= 2 %>
+      <div class="text-center m-1">
+        <p class="fs-4">Не сдал!</p>
+        <%= image_tag("ske.webp") %>
+      </div>
+    <% else %>
+      <div class="text-center m-1">
+        <%= image_tag("littl.avif") %>
+      </div>
+    <% end %>
+  <% end %>
+  <div class="text-center">
+    <h1>Результат:</h1>
+    <p>Правильных ответов: <%= @correct_answers %></p>
+    <p>Ошибок: <%= @errors %></p>
+  </div>
+
   <div class="m-5">
     <div class="row">
-      <div class="d-flex align-items-center justify-content-center">
-        <ul class="list-group">
-          <li class="list-group-item"><%= link_to "All questions", questions_path, class: "btn btn-primary" %></li>
-          <li class="list-group-item"><%= link_to "Test me", play_questions_path, class: "btn btn-primary" %></li>
-        </ul>
+      <div class="row text-center">
+        <div class="m-1"><%= link_to "Учить вопросы", questions_path, class: "btn btn-warning" %></div>
+        <div class="m-1"><%= link_to "Повторить", play_questions_path, class: "btn btn-warning" %></div>
       </div>
     </div>
   </div>
